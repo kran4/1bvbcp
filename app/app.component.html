@@ -2,3 +2,53 @@
 <p>
   Start editing to see some magic happen :)
 </p>
+
+This is some body text 12
+  
+  <div id="images"></div>
+  
+  <script>
+    var cors_api_url = 'https://cors-anywhere.herokuapp.com/';
+    function doCORSRequest(options, fcn) {
+      var x = new XMLHttpRequest();
+      x.open(options.method, cors_api_url + options.url);
+      x.onload = x.onerror = function() {
+        /*fcn(options.method + ' ' + options.url + '\n' + x.status + ' ' + x.statusText + '\n\n' + (x.responseText || '') );*/
+	fcn(x);
+      };
+      if (/^POST/i.test(options.method)) {
+        x.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+      }
+      x.send(options.data);
+    }
+  function doRequest(options, fcn) {
+      var x = new XMLHttpRequest();
+      x.open(options.method, options.url);
+      x.onload = x.onerror = function() {
+        /*fcn(options.method + ' ' + options.url + '\n' + x.status + ' ' + x.statusText + '\n\n' + (x.responseText || '') );*/
+	fcn(x);
+      };
+      if (/^POST/i.test(options.method)) {
+        x.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+      }
+      x.send(options.data);
+    }
+    var sampleJSON0 = "https://tools.learningcontainer.com/sample-json.json?callback=?";
+    var sampleJSON5 = "https://tools.learningcontainer.com/sample-json.json";
+    var sampleJSON1 = "https://raw.githubusercontent.com/poleale/ang-test/gh-pages/testdata.json";
+    var sampleJSON3 = "https://github.com/poleale/ang-test/blob/gh-pages/testdata.json";
+    var sampleJSON4 = "gh-pages/testdata.json";
+    var sampleJSON2 = "testdata.json";
+    doCORSRequest({
+    //doRequest({
+        method:  'POST',
+        url: sampleJSON5,
+        data: false
+      }, function(result) {
+	console.log(result.responseText);
+	var obj = jQuery.parseJSON( result.responseText );
+        console.log(obj);
+    });
+    
+    
+  </script>
